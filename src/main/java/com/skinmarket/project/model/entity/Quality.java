@@ -1,5 +1,7 @@
 package com.skinmarket.project.model.entity;
 
+import com.skinmarket.project.model.entity.enums.QualityColor;
+import com.skinmarket.project.model.entity.enums.QualityName;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

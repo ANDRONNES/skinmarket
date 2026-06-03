@@ -1,5 +1,7 @@
 package com.skinmarket.project.model.entity;
 
+import com.skinmarket.project.model.entity.enums.TransactionStatus;
+import com.skinmarket.project.model.entity.enums.TransactionType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

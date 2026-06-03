@@ -1,5 +1,6 @@
 package com.skinmarket.project.model.entity;
 
+import com.skinmarket.project.model.entity.enums.BuyOrderStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -22,11 +23,15 @@ public class BuyOrder {
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
+
+    private LocalDateTime closedAt;
+
     @NotNull
     private BigDecimal targetPrice;
 
     @Enumerated(EnumType.STRING)
-    private BuyOrderStatus buyOrderStatus;
+    @Builder.Default
+    private BuyOrderStatus buyOrderStatus = BuyOrderStatus.ACTIVE;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_definition_id", nullable = false)

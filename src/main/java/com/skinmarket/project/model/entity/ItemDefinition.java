@@ -1,5 +1,8 @@
 package com.skinmarket.project.model.entity;
 
+import com.skinmarket.project.model.entity.enums.ItemType;
+import com.skinmarket.project.model.entity.enums.StickerType;
+import com.skinmarket.project.model.entity.enums.WeaponType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

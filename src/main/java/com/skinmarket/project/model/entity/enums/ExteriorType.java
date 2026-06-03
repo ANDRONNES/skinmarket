@@ -1,4 +1,4 @@
-package com.skinmarket.project.model.entity;
+package com.skinmarket.project.model.entity.enums;
 
 public enum ExteriorType {
     BS,

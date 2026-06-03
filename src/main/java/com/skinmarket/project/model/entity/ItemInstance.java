@@ -1,5 +1,6 @@
 package com.skinmarket.project.model.entity;
 
+import com.skinmarket.project.model.entity.enums.InstanceStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -21,7 +22,7 @@ public abstract class ItemInstance {
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private InstanceStatus status = InstanceStatus.InInventory;
+    private InstanceStatus status = InstanceStatus.ININVENTORY;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_definition_id", nullable = false)

@@ -1,5 +1,6 @@
 package com.skinmarket.project.model.entity;
 
+import com.skinmarket.project.model.entity.enums.ExteriorType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.*;
