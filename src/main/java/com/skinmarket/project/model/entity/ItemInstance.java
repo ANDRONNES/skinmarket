@@ -15,6 +15,7 @@ import java.util.Set;
 @SuperBuilder
 @ToString
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "item_type")
 public abstract class ItemInstance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

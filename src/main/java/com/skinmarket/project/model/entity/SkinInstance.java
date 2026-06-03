@@ -2,6 +2,7 @@ package com.skinmarket.project.model.entity;
 
 import com.skinmarket.project.model.entity.enums.ExteriorType;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @ToString
+@DiscriminatorValue("SKIN")
 public class SkinInstance extends ItemInstance {
     @NotNull
     @Column(name = "skin_float")

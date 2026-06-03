@@ -1,5 +1,6 @@
 package com.skinmarket.project.model.entity;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -16,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @ToString
+@DiscriminatorValue("CHARM")
 public class CharmInstance extends ItemInstance {
     @NotNull
     @Min(1)

@@ -172,7 +172,7 @@ public class DbInitializer implements CommandLineRunner {
         SkinInstance user2Ak = SkinInstance.builder()
                 .itemDefinition(akVulcan)
                 .inventory(user2.getInventory())
-                .skinFloat(0.4f)
+                .skinFloat(0.06f)
                 .pattern(422)
                 .build();
 
@@ -193,6 +193,7 @@ public class DbInitializer implements CommandLineRunner {
                 .inventory(user2.getInventory())
                 .pattern(99999)
                 .build();
+
 
         itemInstanceService.save(user1Knife);
         itemInstanceService.save(user1Ak);
@@ -246,7 +247,7 @@ public class DbInitializer implements CommandLineRunner {
         buyOrderService.save(buyOrder3);
 
         //Listing
-        List<ItemInstance> itemInstances = List.of(user2Charm1, user2Charm2, user2Charm3);
+        List<ItemInstance> itemInstances = List.of(user2Charm1, user2Charm2, user2Charm3, user2Ak);
 
         for (ItemInstance ii : itemInstances) {
             Listing listing = Listing.builder()
