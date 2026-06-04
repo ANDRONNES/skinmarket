@@ -9,5 +9,6 @@ public record InventoryDTO(
         String itemName,
         ExteriorType skinExterior,
         Float skinFloat,
-        Integer pattern
+        Integer pattern,
+        BigDecimal instantSellPrice
 ) { }

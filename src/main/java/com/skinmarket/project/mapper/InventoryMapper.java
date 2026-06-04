@@ -4,7 +4,11 @@ import com.skinmarket.project.dto.InventoryDTO;
 import com.skinmarket.project.model.entity.CharmInstance;
 import com.skinmarket.project.model.entity.ItemInstance;
 import com.skinmarket.project.model.entity.SkinInstance;
+import com.skinmarket.project.model.entity.enums.BuyOrderStatus;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
+import java.util.Comparator;
 
 
 @Component
@@ -14,6 +18,11 @@ public class InventoryMapper implements DtoMapper<InventoryDTO, ItemInstance> {
         if (itemInstance == null) {
             return null;
         }
+        BigDecimal instantSellPrice = itemInstance.getItemDefinition().getBuyOrderList().stream()
+                .filter(bo -> bo.getBuyOrderStatus() == BuyOrderStatus.ACTIVE)
+                .map(bo -> bo.getTargetPrice())
+                .max(Comparator.naturalOrder())
+                .orElse(java.math.BigDecimal.ZERO);
 
         if (itemInstance instanceof SkinInstance skin) {
             return new InventoryDTO(
@@ -21,7 +30,8 @@ public class InventoryMapper implements DtoMapper<InventoryDTO, ItemInstance> {
                     itemInstance.getItemDefinition().getName(),
                     skin.getExterior(),
                     skin.getSkinFloat(),
-                    skin.getPattern()
+                    skin.getPattern(),
+                    instantSellPrice
             );
         }
 
@@ -31,7 +41,8 @@ public class InventoryMapper implements DtoMapper<InventoryDTO, ItemInstance> {
                     itemInstance.getItemDefinition().getName(),
                     null,
                     null,
-                    charm.getPattern()
+                    charm.getPattern(),
+                    instantSellPrice
             );
         }
 

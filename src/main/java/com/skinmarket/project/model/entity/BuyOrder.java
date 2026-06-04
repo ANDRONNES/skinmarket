@@ -26,6 +26,9 @@ public class BuyOrder {
 
     private LocalDateTime closedAt;
 
+    @Transient
+    public static BigDecimal amountWithFee = new BigDecimal(0.98);
+
     @NotNull
     private BigDecimal targetPrice;
 

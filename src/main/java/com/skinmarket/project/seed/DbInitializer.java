@@ -162,7 +162,19 @@ public class DbInitializer implements CommandLineRunner {
                 .pattern(422)
                 .build();
 
-        CharmInstance user1Charm = CharmInstance.builder()
+        CharmInstance user1Charm1 = CharmInstance.builder()
+                .itemDefinition(biomech)
+                .inventory(user1.getInventory())
+                .pattern(44444)
+                .build();
+
+        CharmInstance user1Charm2 = CharmInstance.builder()
+                .itemDefinition(biomech)
+                .inventory(user1.getInventory())
+                .pattern(44444)
+                .build();
+
+        CharmInstance user1Charm3 = CharmInstance.builder()
                 .itemDefinition(biomech)
                 .inventory(user1.getInventory())
                 .pattern(44444)
@@ -197,7 +209,9 @@ public class DbInitializer implements CommandLineRunner {
 
         itemInstanceService.save(user1Knife);
         itemInstanceService.save(user1Ak);
-        itemInstanceService.save(user1Charm);
+        itemInstanceService.save(user1Charm1);
+        itemInstanceService.save(user1Charm2);
+        itemInstanceService.save(user1Charm3);
         itemInstanceService.save(user2Ak);
         itemInstanceService.save(user2Charm1);
         itemInstanceService.save(user2Charm2);
