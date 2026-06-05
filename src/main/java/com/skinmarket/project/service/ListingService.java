@@ -1,6 +1,9 @@
 package com.skinmarket.project.service;
 
 import com.skinmarket.project.dto.ListingDTO;
+import com.skinmarket.project.exception.BadRequestException;
+import com.skinmarket.project.exception.BuyErrorException;
+import com.skinmarket.project.exception.NotFoundException;
 import com.skinmarket.project.exception.SellErrorException;
 import com.skinmarket.project.mapper.DtoMapper;
 import com.skinmarket.project.model.entity.*;
@@ -51,11 +54,13 @@ public class ListingService {
 
     @Transactional
     public void listOnMarket(Long instanceId, Long sellerId, BigDecimal price) {
-        ItemInstance item = itemInstanceRepository.findById(instanceId).orElseThrow();
-        User seller = userRepository.findById(sellerId).orElseThrow();
+        ItemInstance item = itemInstanceRepository.findById(instanceId)
+                .orElseThrow(() -> new NotFoundException("Item not found."));
+        User seller = userRepository.findById(sellerId)
+                .orElseThrow(() -> new NotFoundException("Seller not found."));
 
         if (price == null || price == BigDecimal.ZERO) {
-            throw new IllegalArgumentException("Set the price!!!");
+            throw new BadRequestException("Set the price!!!");
         }
         Listing newListing = Listing.builder()
                 .itemInstance(item)
@@ -73,8 +78,9 @@ public class ListingService {
     @Transactional
     public void instantSell(Long instanceId, Long sellerId) {
         ItemInstance item = itemInstanceRepository.findById(instanceId)
-                .orElseThrow(() -> new SellErrorException("Item not found"));
-        User seller = userRepository.findById(sellerId).orElseThrow();
+                .orElseThrow(() -> new NotFoundException("Item not found."));
+        User seller = userRepository.findById(sellerId)
+                .orElseThrow(() -> new NotFoundException("Seller not found."));
 
         Long itemDefId = item.getItemDefinition().getItemDefinitionId();
         BuyOrder buyOrder = buyOrderRepository.findHighestActiveBuyOrder(itemDefId)
@@ -84,7 +90,7 @@ public class ListingService {
         BigDecimal orderPrice = buyOrder.getTargetPrice();
 
         if (buyer.getUserId().equals(seller.getUserId())) {
-            throw new IllegalArgumentException("You are already own this item");
+            throw new BadRequestException("You are already own this item");
         }
 
         if (buyer.getBalance().compareTo(orderPrice) < 0) {
@@ -99,7 +105,7 @@ public class ListingService {
                     .itemInstance(item)
                     .build();
             transactionRepository.save(transaction);
-            throw new IllegalStateException("Buyer no longer has enough balance");
+            throw new SellErrorException("Buyer no longer has enough balance");
         }
 
         BigDecimal sellerPayout = BuyOrder.getFinalAmountWithFee(orderPrice);
@@ -132,15 +138,16 @@ public class ListingService {
     @Transactional
     public void buyListedItem(Long listingId, Long buyerId) {
         Listing listing = listingRepository.findById(listingId)
-                .orElseThrow(() -> new SellErrorException("Listing not found"));
-        User buyer = userRepository.findById(buyerId).orElseThrow();
+                .orElseThrow(() -> new NotFoundException("Listing not found"));
+        User buyer = userRepository.findById(buyerId)
+                .orElseThrow(() -> new NotFoundException("Buyer not found."));
         ItemInstance item = listing.getItemInstance();
         User seller = listing.getSeller();
 
         BigDecimal listingPrice = listing.getPrice();
 
         if (buyer.getUserId().equals(seller.getUserId())) {
-            throw new IllegalArgumentException("You already own this item");
+            throw new BadRequestException("You are already own this item");
         }
 
         if (buyer.getBalance().compareTo(listingPrice) < 0) {
@@ -155,7 +162,7 @@ public class ListingService {
                     .itemInstance(item)
                     .build();
             transactionRepository.save(transaction);
-            throw new IllegalStateException("Insufficient funds");
+            throw new BuyErrorException("Insufficient funds");
         }
 
         BigDecimal sellerPayout = BuyOrder.getFinalAmountWithFee(listingPrice);
