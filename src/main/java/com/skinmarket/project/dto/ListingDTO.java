@@ -10,5 +10,6 @@ public record ListingDTO(
         String itemName,
         ExteriorType skinExterior,
         Float skinFloat,
-        Integer pattern
+        Integer pattern,
+        String imageUrl
 ) { }

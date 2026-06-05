@@ -31,7 +31,8 @@ public class InventoryMapper implements DtoMapper<InventoryDTO, ItemInstance> {
                     skin.getExterior(),
                     skin.getSkinFloat(),
                     skin.getPattern(),
-                    instantSellPrice
+                    instantSellPrice,
+                    itemInstance.getItemDefinition().getImageUrl()
             );
         }
 
@@ -42,7 +43,8 @@ public class InventoryMapper implements DtoMapper<InventoryDTO, ItemInstance> {
                     null,
                     null,
                     charm.getPattern(),
-                    instantSellPrice
+                    instantSellPrice,
+                    itemInstance.getItemDefinition().getImageUrl()
             );
         }
 

@@ -23,7 +23,8 @@ public class ListingMapper implements DtoMapper<ListingDTO,Listing> {
                     item.getItemDefinition().getName(),
                     skin.getExterior(),
                     skin.getSkinFloat(),
-                    skin.getPattern()
+                    skin.getPattern(),
+                    item.getItemDefinition().getImageUrl()
             );
         }
 
@@ -34,7 +35,8 @@ public class ListingMapper implements DtoMapper<ListingDTO,Listing> {
                     item.getItemDefinition().getName(),
                     null,
                     null,
-                    charm.getPattern()
+                    charm.getPattern(),
+                    item.getItemDefinition().getImageUrl()
             );
         }
 

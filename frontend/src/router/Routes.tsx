@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import App from "../layout/App.tsx";
+import Market from "../pages/Market.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -7,7 +8,7 @@ export const router = createBrowserRouter([
         element: <App />,
         children: [
             {path: "/" , element: <Navigate to={"/market"} replace /> },
-            // {path: "/market", element: <Market />},
+            {path: "/market", element: <Market />},
             // {path: "/inventory/:userId", element: <Inventory />},
             { path: "*", element: <Navigate replace to="" /> },
         ]
