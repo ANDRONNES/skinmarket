@@ -44,6 +44,25 @@
     color: #2e7d32;
     margin-top: auto;
     padding-top: 0.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+}
+
+.price-tag p {
+    font-size: 0.8rem;
+    color: #757575;
+    margin: 0;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.no-orders-tag {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #d32f2f;
+    margin-top: auto;
+    padding-top: 0.5rem;
 }
 
 .buy-section {
@@ -54,7 +73,7 @@
 }
 
 .buy-btn {
-    background-color: #1a1a1a;
+    background-color: #4BBD5C;
     color: #ffffff;
     border: none;
     border-radius: 6px;
@@ -66,11 +85,32 @@
 }
 
 .buy-btn:hover {
-    background-color: #333333;
+    background-color: #2fe346;
     transform: translateY(-1px);
 }
 
 .buy-btn:active {
+    transform: translateY(0);
+}
+
+.sell-btn {
+    background-color: #FF8200;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.sell-btn:hover {
+    background-color: #ff9004;
+    transform: translateY(-1px);
+}
+
+.sell-btn:active {
     transform: translateY(0);
 }
 
