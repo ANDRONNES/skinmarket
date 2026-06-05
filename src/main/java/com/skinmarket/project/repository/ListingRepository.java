@@ -9,6 +9,9 @@ import java.util.List;
 @Repository
 public interface ListingRepository extends JpaRepository<Listing, Long> {
 
-    @Query("SELECT l FROM Listing l LEFT JOIN FETCH l.itemInstance ii LEFT JOIN FETCH ii.itemDefinition")
+    @Query("SELECT l FROM Listing l " +
+            "LEFT JOIN FETCH l.itemInstance ii " +
+            "LEFT JOIN FETCH ii.itemDefinition " +
+            "WHERE l.status = com.skinmarket.project.model.entity.enums.ListingStatus.ACTIVE")
     List<Listing> findAllWithItems();
 }

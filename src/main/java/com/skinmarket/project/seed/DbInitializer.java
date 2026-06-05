@@ -5,6 +5,7 @@ import com.skinmarket.project.model.entity.enums.*;
 import com.skinmarket.project.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -39,6 +40,7 @@ public class DbInitializer implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         //Quality
         Quality milspec = Quality.builder()
@@ -248,6 +250,7 @@ public class DbInitializer implements CommandLineRunner {
                 .buyer(user1)
                 .seller(user2)
                 .buyOrder(buyOrder3)
+                .listing(null)
                 .createdAt(buyOrder3.getClosedAt())
                 .price(buyOrder3.getTargetPrice())
                 .itemInstance(user1Knife)
@@ -301,11 +304,13 @@ public class DbInitializer implements CommandLineRunner {
         Listing listing1 = listingService.getAll().stream()
                 .filter(l -> l.getListingId() == 3l)
                 .findFirst().orElseThrow();
+
         Favourite favourite = Favourite.builder()
                 .priceAtMoment(listing1.getPrice())
                 .user(user1)
                 .listing(listing1)
                 .build();
+        listing1.getFavouriteList().add(favourite);
 
         favouriteService.save(favourite);
     }

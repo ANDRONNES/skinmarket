@@ -2,7 +2,6 @@ package com.skinmarket.project.service;
 
 import com.skinmarket.project.dto.InventoryDTO;
 import com.skinmarket.project.mapper.DtoMapper;
-import com.skinmarket.project.mapper.InventoryMapper;
 import com.skinmarket.project.model.entity.Inventory;
 import com.skinmarket.project.model.entity.ItemInstance;
 import com.skinmarket.project.model.entity.enums.InstanceStatus;

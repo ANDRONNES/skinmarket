@@ -1,5 +1,6 @@
 package com.skinmarket.project.model.entity;
 
+import com.skinmarket.project.model.entity.enums.ListingStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +31,13 @@ public class Listing {
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Transient
+    public static BigDecimal marketFee = new BigDecimal(0.04);
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private ListingStatus status = ListingStatus.ACTIVE;
+
     @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -48,5 +56,9 @@ public class Listing {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Transaction transaction;
+
+    public static BigDecimal getFinalAmountWithFee(BigDecimal price){
+        return price.multiply(BigDecimal.ONE.subtract(marketFee));
+    }
 
 }

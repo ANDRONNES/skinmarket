@@ -27,7 +27,7 @@ public class BuyOrder {
     private LocalDateTime closedAt;
 
     @Transient
-    public static BigDecimal amountWithFee = new BigDecimal(0.98);
+    public static BigDecimal marketFee = new BigDecimal(0.02);
 
     @NotNull
     private BigDecimal targetPrice;
@@ -48,4 +48,9 @@ public class BuyOrder {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Transaction transaction;
+
+    public static BigDecimal getFinalAmountWithFee(BigDecimal price){
+        return price.multiply(BigDecimal.ONE.subtract(marketFee));
+    }
 }
+

@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -24,7 +23,7 @@ public class InventoryController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<InventoryDTO>> GetInventory(@PathVariable Long userId) {
+    public ResponseEntity<List<InventoryDTO>> getInventory(@PathVariable Long userId) {
         List<InventoryDTO> inventory = inventoryService.getUserInventory(userId);
         return ResponseEntity.ok(inventory);
     }
