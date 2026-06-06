@@ -1,8 +1,8 @@
-import {useEffect, useState } from "react";
-import type {Listing, BuyRequest} from "../../types/types.ts";
+import {useEffect, useState} from "react";
+import type {BuyRequest, Listing} from "../../types/types.ts";
 import agent from "../agent.ts";
 
-export function useListings(){
+export function useListings() {
     const [listings, setListings] = useState<Listing[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -11,12 +11,12 @@ export function useListings(){
 
     useEffect(() => {
         const getListings = async () => {
-            try{
+            try {
                 setLoading(true);
                 setError(null);
                 const res = await agent.get<Listing[]>("/market/listings")
                 setListings(res.data);
-            } catch(err: any){
+            } catch (err: any) {
                 console.error("error loading listing", err)
                 setError("Error loading lisings")
             } finally {
@@ -25,21 +25,22 @@ export function useListings(){
         }
 
         getListings()
-    },[])
+    }, [])
 
     const buyListing = async (listingId: number) => {
-        try{
+        try {
             const requestData: BuyRequest = {
                 buyerId: CURRENT_USERID
             }
             await agent.post(`/market/listings/${listingId}/buy`, requestData);
-            setListings(prevListings => prevListings.filter(item => item.listingId !== listingId));
-            return { success : true }
-        } catch(err: any){
+            setListings(prevListings => prevListings
+                .filter(item => item.listingId !== listingId));
+            return {success: true}
+        } catch (err: any) {
             const serverError = err.response?.data?.message || "Purchase failed";
-            return { success: false, error: serverError}
+            return {success: false, error: serverError}
         }
     };
 
-    return { listings, loading, error, buyListing}
+    return {listings, loading, error, buyListing}
 }

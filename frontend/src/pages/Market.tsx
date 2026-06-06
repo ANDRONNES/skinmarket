@@ -5,11 +5,11 @@ import "../styles/Market.css"
 export default function Market() {
     const {listings, loading, error, buyListing} = useListings();
 
-    const handleBuy = async (listingId: number)=> {
+    const handleBuy = async (listingId: number) => {
         const result = await buyListing(listingId)
-        if (result.success){
+        if (result.success) {
             alert("Item has bought successfully!")
-        } else{
+        } else {
             alert(`Error: ${result.error}`)
         }
     }

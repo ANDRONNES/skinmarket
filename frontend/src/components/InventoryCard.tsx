@@ -3,10 +3,10 @@ import "../styles/ListingCard.css"
 
 type Props = {
     item: Inventory
-    // onBuy: (listingId : number) => void;
+    onSell: () => void;
 }
 
-export default function ListingCard({item}: Props) {
+export default function ListingCard({item, onSell}: Props) {
 
     const hasInstantSell = parseFloat(item.instantSellPrice) > 0;
 
@@ -45,7 +45,7 @@ export default function ListingCard({item}: Props) {
                     )}
                     <button
                         className="sell-btn"
-                        // onClick={() => onInstantSell?.(item.itemInstanceId)}
+                        onClick={onSell}
                     >
                         Sell
                     </button>

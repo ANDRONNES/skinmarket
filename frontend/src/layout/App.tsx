@@ -1,15 +1,15 @@
-import { Outlet } from 'react-router'
+import {Outlet} from 'react-router'
 import NavBar from "./NavBar";
 
 function App() {
 
 
-  return (
-    <>
-      <NavBar />
-      <Outlet />
-    </>
-  )
+    return (
+        <>
+            <NavBar/>
+            <Outlet/>
+        </>
+    )
 }
 
 export default App

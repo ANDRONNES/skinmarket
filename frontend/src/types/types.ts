@@ -1,6 +1,6 @@
 type Listing = {
-    listingId : number;
-    price : string;
+    listingId: number;
+    price: string;
     itemName: string;
     skinExterior: string | null;
     skinFloat: number | null;
@@ -9,15 +9,15 @@ type Listing = {
 }
 
 type BuyRequest = {
-    buyerId : number
+    buyerId: number
 }
 
 type PriceRequest = {
-    price : string
+    price: string
 }
 
 type Inventory = {
-    itemInstanceId : number;
+    itemInstanceId: number;
     itemName: string;
     skinExterior: string | null;
     skinFloat: number | null;
@@ -26,9 +26,4 @@ type Inventory = {
     imageUrl: string | null;
 }
 
-type ErrorResponse = {
-    message: string;
-    status: number;
-}
-
-export type {Listing, BuyRequest, PriceRequest, Inventory, ErrorResponse}
+export type {Listing, BuyRequest, PriceRequest, Inventory}

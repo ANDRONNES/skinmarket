@@ -16,6 +16,7 @@
     justify-content: space-between;
     margin-top: 1rem;
 }
+
 .specs {
     display: flex;
     gap: 8px;

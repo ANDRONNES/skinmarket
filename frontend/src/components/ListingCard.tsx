@@ -3,7 +3,7 @@ import "../styles/ListingCard.css"
 
 type Props = {
     listing: Listing
-    onBuy: (listingId : number) => void;
+    onBuy: (listingId: number) => void;
 }
 
 export default function ListingCard({listing, onBuy}: Props) {

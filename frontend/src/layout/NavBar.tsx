@@ -1,10 +1,10 @@
-import { NavLink } from "react-router";
+import {NavLink} from "react-router";
 import "../styles/NavBar.css"
 
-export default function NavBar(){
+export default function NavBar() {
     const CURRENT_USERID = 1;
 
-    return(
+    return (
         <>
             <header className="nav">
                 <div className="link-container">

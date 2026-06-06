@@ -173,13 +173,13 @@ public class DbInitializer implements CommandLineRunner {
         CharmInstance user1Charm2 = CharmInstance.builder()
                 .itemDefinition(biomech)
                 .inventory(user1.getInventory())
-                .pattern(44444)
+                .pattern(44445)
                 .build();
 
         CharmInstance user1Charm3 = CharmInstance.builder()
                 .itemDefinition(biomech)
                 .inventory(user1.getInventory())
-                .pattern(44444)
+                .pattern(44446)
                 .build();
 
 
