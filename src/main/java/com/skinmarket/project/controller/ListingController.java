@@ -4,7 +4,6 @@ import com.skinmarket.project.dto.BuyRequestDTO;
 import com.skinmarket.project.dto.ListingDTO;
 import com.skinmarket.project.service.ListingService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

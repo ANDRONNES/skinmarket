@@ -5,12 +5,11 @@ import com.skinmarket.project.dto.PriceRequestDTO;
 import com.skinmarket.project.service.InventoryService;
 import com.skinmarket.project.service.ListingService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("api/inventory")
 public class InventoryController {
 

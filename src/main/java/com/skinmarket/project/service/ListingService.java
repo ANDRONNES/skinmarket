@@ -78,9 +78,9 @@ public class ListingService {
     @Transactional
     public void instantSell(Long instanceId, Long sellerId) {
         ItemInstance item = itemInstanceRepository.findById(instanceId)
-                .orElseThrow(() -> new NotFoundException("Item not found."));
+                .orElseThrow(() -> new NotFoundException("Item not found"));
         User seller = userRepository.findById(sellerId)
-                .orElseThrow(() -> new NotFoundException("Seller not found."));
+                .orElseThrow(() -> new NotFoundException("Seller not found"));
 
         Long itemDefId = item.getItemDefinition().getItemDefinitionId();
         BuyOrder buyOrder = buyOrderRepository.findHighestActiveBuyOrder(itemDefId)
