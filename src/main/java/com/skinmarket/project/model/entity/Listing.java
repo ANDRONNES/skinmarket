@@ -49,7 +49,7 @@ public class Listing {
     private User seller;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_instance_id", unique = true, nullable = false)
+    @JoinColumn(name = "item_instance_id", unique = true, nullable = true)
     private ItemInstance itemInstance;
 
     @OneToOne(mappedBy = "listing", fetch = FetchType.LAZY)

@@ -52,4 +52,13 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
+
+
+    @PrePersist
+    @PreUpdate
+    private void xorValidation() {
+        if ((listing != null && buyOrder != null) || (listing != null && buyOrder != null)) {
+            throw new IllegalStateException("Transaction must be associated with either a Listing or a BuyOrder, but not both or none");
+        }
+    }
 }

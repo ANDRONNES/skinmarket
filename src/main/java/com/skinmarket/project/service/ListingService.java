@@ -59,6 +59,9 @@ public class ListingService {
         User seller = userRepository.findById(sellerId)
                 .orElseThrow(() -> new NotFoundException("Seller not found."));
 
+        if (!item.getInventory().getUser().getUserId().equals(sellerId)){
+            throw new BadRequestException("You can list only items that you own");
+        }
         if (price == null || price == BigDecimal.ZERO) {
             throw new BadRequestException("Set the price!!!");
         }
@@ -81,6 +84,10 @@ public class ListingService {
                 .orElseThrow(() -> new NotFoundException("Item not found"));
         User seller = userRepository.findById(sellerId)
                 .orElseThrow(() -> new NotFoundException("Seller not found"));
+
+        if (!item.getInventory().getUser().getUserId().equals(sellerId)){
+            throw new BadRequestException("You can sell only items that you own");
+        }
 
         Long itemDefId = item.getItemDefinition().getItemDefinitionId();
         BuyOrder buyOrder = buyOrderRepository.findHighestActiveBuyOrder(itemDefId)
@@ -165,15 +172,10 @@ public class ListingService {
             throw new BuyErrorException("Insufficient funds");
         }
 
-        BigDecimal sellerPayout = BuyOrder.getFinalAmountWithFee(listingPrice);
+        BigDecimal sellerPayout = Listing.getFinalAmountWithFee(listingPrice);
         seller.setBalance(seller.getBalance().add(sellerPayout));
         buyer.setBalance(buyer.getBalance().subtract(listingPrice));
 
-        item.setInventory(buyer.getInventory());
-        item.setStatus(InstanceStatus.ININVENTORY);
-        item.setActiveListing(null);
-
-        listing.setStatus(ListingStatus.SOLD);
 
         Transaction transaction = Transaction.builder()
                 .transactionType(TransactionType.LISTINGSELL)
@@ -189,6 +191,13 @@ public class ListingService {
 
         transactionRepository.save(transaction);
         listing.setTransaction(transaction);
+
+        item.setActiveListing(null);
+        listing.setItemInstance(null);
+
+        item.setInventory(buyer.getInventory());
+        item.setStatus(InstanceStatus.ININVENTORY);
+        listing.setStatus(ListingStatus.SOLD);
     }
 
 }
