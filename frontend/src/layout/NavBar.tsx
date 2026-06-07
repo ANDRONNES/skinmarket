@@ -14,6 +14,9 @@ export default function NavBar() {
                     <NavLink to={`/inventory/${CURRENT_USERID}`}>
                         INVENTORY
                     </NavLink>
+                    <NavLink to="/deposit">
+                            DEPOSIT
+                    </NavLink>
                 </div>
 
                 <div className={"label"}>

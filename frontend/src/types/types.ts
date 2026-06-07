@@ -26,4 +26,14 @@ type Inventory = {
     imageUrl: string | null;
 }
 
-export type {Listing, BuyRequest, PriceRequest, Inventory}
+type ItemDefinition = {
+    itemDefinitionId: number;
+    name: string;
+    imageUrl: string;
+}
+
+type DepositItemRequest = {
+    itemDefinitionId: number;
+}
+
+export type {Listing, BuyRequest, PriceRequest, Inventory, DepositItemRequest, ItemDefinition}
